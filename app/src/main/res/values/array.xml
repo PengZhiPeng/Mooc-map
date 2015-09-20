@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="more_feature">
+        <item>基本地图</item>
+        <item>POI检索</item>
+        <item>路线规划</item>
+        <item>公交信息查询</item>
+        <item>全景地图</item>
+    </string-array>
+</resources>

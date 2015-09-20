@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Mooc-map</string>
+
+    <string name="demo_name_poi">POI搜索功能</string>
+
+    <string name="recording">Recording</string>
+    <string name="reminder">Reminder</string>
+    <string name="createnote">Create note</string>
+    <string name="photo">Photo</string>
+</resources>
