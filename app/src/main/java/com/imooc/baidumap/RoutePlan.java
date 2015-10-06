@@ -5,14 +5,18 @@ import android.animation.ObjectAnimator;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Outline;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewOutlineProvider;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -89,9 +93,6 @@ public class RoutePlan extends Activity implements BaiduMap.OnMapClickListener,
     private boolean isShow = true;
     private Button hideAndShowWindow;
 
-    private View poiInRoutePlan;
-
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_routeplan);
@@ -159,18 +160,21 @@ public class RoutePlan extends Activity implements BaiduMap.OnMapClickListener,
                 dialog.dismiss();
                 switch (which) {
                     case 0:
-//                        Intent tomainactivity = new Intent(RoutePlan.this,MainActivity.class);
-//                        startActivity(tomainactivity);
+                        Intent intent2Main = new Intent(RoutePlan.this,MainActivity.class);
+                        startActivity(intent2Main);
                         finish();
                         break;
-                    case 1:
-
+                    case 1://POI
+                        Intent intent2Poi = new Intent(RoutePlan.this,PoiSearch.class);
+                        startActivity(intent2Poi);
+                        finish();
                         break;
-                    case 2:
-
+                    case 2://routePlan
                         break;
-                    case 3:
-
+                    case 3://BusLine
+                        Intent intent2Bus = new Intent(RoutePlan.this,BusLineSearch.class);
+                        startActivity(intent2Bus);
+                        finish();
                         break;
                     case 4:
 
@@ -208,9 +212,6 @@ public class RoutePlan extends Activity implements BaiduMap.OnMapClickListener,
         MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(15.0f);
         mBaidumap.setMapStatus(msu);
 
-        poiInRoutePlan = findViewById(R.id.poi_routeplan);
-        poiInRoutePlan.setVisibility(View.GONE);
-
         mBtnPre = (Button) findViewById(R.id.pre);
         mBtnNext = (Button) findViewById(R.id.next);
         mBtnPre.setVisibility(View.INVISIBLE);
@@ -224,6 +225,15 @@ public class RoutePlan extends Activity implements BaiduMap.OnMapClickListener,
                 child.setVisibility(View.GONE);
             }
         }
+        //改变比例尺的位置
+        final int screenheight = this.getWindowManager().getDefaultDisplay().getHeight();
+        mBaidumap.setOnMapLoadedCallback(new BaiduMap.OnMapLoadedCallback() {
+
+            @Override
+            public void onMapLoaded() {
+                mMapView.setScaleControlPosition(new Point(200, screenheight-307));
+            }
+        });
 
         ViewOutlineProvider viewOutlineProvider = new ViewOutlineProvider() {
 
@@ -532,7 +542,7 @@ public class RoutePlan extends Activity implements BaiduMap.OnMapClickListener,
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_routeplan, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -541,12 +551,53 @@ public class RoutePlan extends Activity implements BaiduMap.OnMapClickListener,
         switch (item.getItemId()){
             case android.R.id.home: //点击actionbar中的应用图标返回mainactivity
                 Intent intent = new Intent(this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//跳转后为栈顶且清空栈
-                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);//不启动新的，将原有的activity推至栈顶
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//跳转后为栈顶且清除原该activity栈之上的activity
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);//栈里有则不创建新的
                 startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    //点击EditText文本框之外任何地方隐藏键盘
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (isShouldHideInput(v, ev)) {
+
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+            return super.dispatchTouchEvent(ev);
+        }
+        // 必不可少，否则所有的组件都不会有TouchEvent了
+        if (getWindow().superDispatchTouchEvent(ev)) {
+            return true;
+        }
+        return onTouchEvent(ev);
+    }
+
+    public boolean isShouldHideInput(View v, MotionEvent event) {
+        if (v != null && (v instanceof EditText)) {
+            int[] leftTop = {0, 0};
+            //获取输入框当前的location位置
+            v.getLocationInWindow(leftTop);
+            int left = leftTop[0];
+            int top = leftTop[1];
+            int bottom = top + v.getHeight();
+            int right = left + v.getWidth();
+            if (event.getX() > left && event.getX() < right
+                    && event.getY() > top && event.getY() < bottom) {
+                // 点击的是输入框区域，保留点击EditText的事件
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
