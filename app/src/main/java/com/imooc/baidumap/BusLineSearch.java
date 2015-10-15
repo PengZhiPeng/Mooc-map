@@ -141,8 +141,10 @@ public class BusLineSearch extends FragmentActivity implements
                         break;
                     case 3://BusLine
                         break;
-                    case 4:
-
+                    case 4://panorama
+						Intent intent2Pano = new Intent(BusLineSearch.this,Way2Pano.class);
+						startActivity(intent2Pano);
+						finish();
                         break;
 
                 }

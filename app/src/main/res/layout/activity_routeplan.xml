@@ -32,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="6"
+                android:text="梅州"
                 android:gravity="center_horizontal">
 
                 <requestFocus />
@@ -51,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="6"
+                android:text="梅州"
                 android:gravity="center_horizontal">
 
                 <requestFocus />

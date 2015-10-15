@@ -3,8 +3,9 @@
 
     <string name="demo_name_poi">POI搜索功能</string>
 
-    <string name="recording">Recording</string>
-    <string name="reminder">Reminder</string>
-    <string name="createnote">Create note</string>
-    <string name="photo">Photo</string>
+    <string name="title_activity_way2_pano">Way2Pano</string>
+    <string name="demo_title_panorama">打开全景</string>
+    <string name="demo_desc_panorama4">通过百度地图UID获取内景</string>
+    <string name="demo_desc_panorama1">通过百度经纬度坐标获取全景</string>
+    <string name="title_activity_pano_main">PanoMain</string>
 </resources>

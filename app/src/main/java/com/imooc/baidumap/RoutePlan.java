@@ -57,7 +57,7 @@ import com.baidu.mapapi.search.route.WalkingRoutePlanOption;
 import com.baidu.mapapi.search.route.WalkingRouteResult;
 
 /**
- * 此demo用来展示如何进行驾车、步行、公交路线搜索并在地图使用RouteOverlay、TransitOverlay绘制
+ * 此activity用来展示如何进行驾车、步行、公交路线搜索并在地图使用RouteOverlay、TransitOverlay绘制
  * 同时展示如何进行节点浏览并弹出泡泡
  */
 public class RoutePlan extends Activity implements BaiduMap.OnMapClickListener,
@@ -176,8 +176,10 @@ public class RoutePlan extends Activity implements BaiduMap.OnMapClickListener,
                         startActivity(intent2Bus);
                         finish();
                         break;
-                    case 4:
-
+                    case 4://panorama
+                        Intent intent2Pano = new Intent(RoutePlan.this,Way2Pano.class);
+                        startActivity(intent2Pano);
+                        finish();
                         break;
 
                 }

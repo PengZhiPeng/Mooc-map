@@ -228,8 +228,10 @@ public class PoiSearch extends FragmentActivity implements
 						startActivity(intent2Bus);
 						finish();
 						break;
-					case 4:
-
+					case 4://panorama
+						Intent intent2Pano = new Intent(PoiSearch.this,Way2Pano.class);
+						startActivity(intent2Pano);
+						finish();
 						break;
 				}
 			}

@@ -191,8 +191,9 @@ public class MainActivity extends Activity {
                         Intent intent2Bus = new Intent(MainActivity.this,BusLineSearch.class);
                         startActivity(intent2Bus);
                         break;
-                    case 4:
-
+                    case 4://panorama
+                        Intent intent2Pano = new Intent(MainActivity.this,Way2Pano.class);
+                        startActivity(intent2Pano);
                         break;
                 }
             }
