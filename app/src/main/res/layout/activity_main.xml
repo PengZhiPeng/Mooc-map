@@ -9,12 +9,21 @@
         android:layout_height="match_parent"
         android:clickable="true" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/loca_poi_search" />
+
+        <include layout="@layout/jump_btn" />
+    </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/typebar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="4dp">
+        android:layout_alignParentBottom="true">
 
         <include layout="@layout/map_type" />
 
@@ -29,7 +38,7 @@
         android:layout_marginStart="10dp"
         android:clickable="true"
         app:cardCornerRadius="4dp"
-        app:cardElevation="2dp">
+        app:cardElevation="3dp">
 
         <ImageButton
             android:id="@+id/ib_locaMyPosition"
@@ -52,15 +61,6 @@
         android:src="@drawable/ic_action_add"
         android:stateListAnimator="@anim/anim"
         android:translationZ="120dp" />
-
-    <Button
-        android:id="@+id/map_mode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="10dp"
-        android:stateListAnimator="@anim/anim" />
 
 </RelativeLayout>
 

@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -32,7 +31,6 @@ import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
 
-
 public class MainActivity extends Activity {
 
     private MapView mMapView;
@@ -50,7 +48,6 @@ public class MainActivity extends Activity {
     private float mCurrentX;
     private MyLocationConfiguration.LocationMode mLocationMode;
     private View fabView;
-    private Button requestLocButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +64,6 @@ public class MainActivity extends Activity {
     }
 
     private void initLocation() {
-
         mlocationClient = new LocationClient(this);
         mLocationListener = new MyLocationListener();
         mlocationClient.registerLocationListener(mLocationListener);
@@ -91,11 +87,9 @@ public class MainActivity extends Activity {
     private void initView() {
         mMapView = (MapView) findViewById(R.id.id_bmapView);
         mBaiduMap = mMapView.getMap();
-        MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(15.0f);
+        MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(17.0f);//缩放等级17=100m
         mBaiduMap.setMapStatus(msu);
         mLocationMode = MyLocationConfiguration.LocationMode.NORMAL;
-        requestLocButton = (Button) findViewById(R.id.map_mode);
-        requestLocButton.setText("普通模式");
         //隐藏缩放控件和百度logo
         int childCount = mMapView.getChildCount();
         for (int i = 0; i < childCount; i++) {
@@ -110,7 +104,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void onMapLoaded() {
-                mMapView.setScaleControlPosition(new Point(200, screenheight-307));
+                mMapView.setScaleControlPosition(new Point(200, screenheight - 307));
             }
         });
 
@@ -138,33 +132,40 @@ public class MainActivity extends Activity {
                 centerToMyLocation();
             }
         });
-
-        requestLocButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (mLocationMode) {
-                    case NORMAL:
-                        mLocationMode = MyLocationConfiguration.LocationMode.FOLLOWING;
-                        requestLocButton.setText("跟随模式");
-                        break;
-                    case FOLLOWING:
-                        mLocationMode = MyLocationConfiguration.LocationMode.COMPASS;
-                        requestLocButton.setText("罗盘模式");
-                        break;
-                    case COMPASS:
-                        mLocationMode = MyLocationConfiguration.LocationMode.NORMAL;
-                        requestLocButton.setText("普通模式");
-                        break;
-                }
-            }
-        });
-
         fabView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialog();
             }
         });
+        findViewById(R.id.jump2route).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toRoute = new Intent(MainActivity.this, RoutePlan.class);
+                startActivity(toRoute);
+            }
+        });
+        findViewById(R.id.jump2bus).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toBus = new Intent(MainActivity.this, BusLineSearch.class);
+                startActivity(toBus);
+            }
+        });
+        findViewById(R.id.jump2pano).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toPano = new Intent(MainActivity.this, PanoMain.class);
+                startActivity(toPano);
+            }
+        });
+//        findViewById(R.id.settingsBtn).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent toSettings = new Intent(MainActivity.this,SettingsActivity.class);
+//                startActivity(toSettings);
+//            }
+//        });
     }
 
     private void showDialog() {
@@ -180,19 +181,19 @@ public class MainActivity extends Activity {
                     case 0:
                         break;
                     case 1://poi
-                        Intent intent2Poi = new Intent(MainActivity.this,PoiSearch.class);
+                        Intent intent2Poi = new Intent(MainActivity.this, PoiSearch.class);
                         startActivity(intent2Poi);
                         break;
                     case 2://route
-                        Intent intent2Route = new Intent(MainActivity.this,RoutePlan.class);
+                        Intent intent2Route = new Intent(MainActivity.this, RoutePlan.class);
                         startActivity(intent2Route);
                         break;
                     case 3://bus
-                        Intent intent2Bus = new Intent(MainActivity.this,BusLineSearch.class);
+                        Intent intent2Bus = new Intent(MainActivity.this, BusLineSearch.class);
                         startActivity(intent2Bus);
                         break;
                     case 4://panorama
-                        Intent intent2Pano = new Intent(MainActivity.this,Way2Pano.class);
+                        Intent intent2Pano = new Intent(MainActivity.this, PanoMain.class);
                         startActivity(intent2Pano);
                         break;
                 }
@@ -290,6 +291,7 @@ public class MainActivity extends Activity {
         MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(latLng);
         mBaiduMap.animateMapStatus(msu);
     }
+
     //定位
     private class MyLocationListener implements BDLocationListener {
 
@@ -308,13 +310,11 @@ public class MainActivity extends Activity {
             //更新经纬度
             mLatitude = location.getLatitude();
             mLongtitude = location.getLongitude();
-
             if (isFirstIn) {
                 LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
                 MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(latLng);
                 mBaiduMap.animateMapStatus(msu);
                 isFirstIn = false;
-
                 Toast.makeText(context, location.getAddrStr(), Toast.LENGTH_SHORT).show();
             }
         }

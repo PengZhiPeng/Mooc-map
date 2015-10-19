@@ -8,6 +8,8 @@ import android.graphics.Outline;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewOutlineProvider;
@@ -60,6 +62,9 @@ public class BusLineSearch extends FragmentActivity implements
 	BusLineOverlay overlay;//公交路线绘制对象
 
     private View fabView;
+	private boolean isShow = true;
+	private View busSearchView;
+
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -87,6 +92,34 @@ public class BusLineSearch extends FragmentActivity implements
 				showDialog();
 			}
 		});
+		findViewById(R.id.jump2route).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent toRoute = new Intent(BusLineSearch.this, RoutePlan.class);
+				startActivity(toRoute);
+				finish();
+			}
+		});
+		findViewById(R.id.jump2bus).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (isShow){
+					busSearchView.setVisibility(View.GONE);
+					isShow = false;
+				}else{
+					busSearchView.setVisibility(View.VISIBLE);
+					isShow = true;
+				}
+			}
+		});
+		findViewById(R.id.jump2pano).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent toPano = new Intent(BusLineSearch.this, PanoMain.class);
+				startActivity(toPano);
+				finish();
+			}
+		});
     }
 
     private void initView() {
@@ -112,6 +145,7 @@ public class BusLineSearch extends FragmentActivity implements
         // 获得右下角圆形按钮对象
         fabView = findViewById(R.id.fab_add_bus);
         fabView.setOutlineProvider(viewOutlineProvider);
+		busSearchView = findViewById(R.id.bus_searchView);
     }
 
     private void showDialog() {
@@ -142,7 +176,7 @@ public class BusLineSearch extends FragmentActivity implements
                     case 3://BusLine
                         break;
                     case 4://panorama
-						Intent intent2Pano = new Intent(BusLineSearch.this,Way2Pano.class);
+						Intent intent2Pano = new Intent(BusLineSearch.this,PanoMain.class);
 						startActivity(intent2Pano);
 						finish();
                         break;
@@ -363,5 +397,23 @@ public class BusLineSearch extends FragmentActivity implements
 	@Override
 	public boolean onMapPoiClick(MapPoi poi) {
 		return false;
+	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.menu_main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()){
+			case android.R.id.home: //点击actionbar中的应用图标返回mainactivity
+				Intent intent = new Intent(this, MainActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//跳转后为栈顶且清除原该activity栈之上的activity
+				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);//栈里有则不创建新的
+				startActivity(intent);
+				return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 }

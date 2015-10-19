@@ -75,14 +75,11 @@ public class RoutePlan extends Activity implements BaiduMap.OnMapClickListener,
     private BaiduMap mBaidumap = null;
     //搜索相关
     private RoutePlanSearch mSearch = null;    // 搜索模块，也可去掉地图模块独立使用
-
     private EditText startCityText;
     private EditText endCityText;
-    private String myCity = null;
 
     private View fabView;
     private View layoutRoutePlan;
-
     //定位相关
     private LocationClient mlocationClient;
     private MyLocationListener mLocationListener;
@@ -91,7 +88,6 @@ public class RoutePlan extends Activity implements BaiduMap.OnMapClickListener,
     private double mLongtitude;
 
     private boolean isShow = true;
-    private Button hideAndShowWindow;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,7 +97,6 @@ public class RoutePlan extends Activity implements BaiduMap.OnMapClickListener,
         initMapView();
         initLocation();
         setOnClickListener();
-        
         // 初始化搜索模块，注册事件监听
         mSearch = RoutePlanSearch.newInstance();
         mSearch.setOnGetRoutePlanResultListener(this);
@@ -125,26 +120,47 @@ public class RoutePlan extends Activity implements BaiduMap.OnMapClickListener,
             }
         });
         layoutRoutePlan = findViewById(R.id.layout_routeplan);
-        hideAndShowWindow = (Button) findViewById(R.id.btn_hide_info);
-
+        final View layoutJumpBtn = findViewById(R.id.layout_jumpBtn);
         final float curTranslationY = layoutRoutePlan.getTranslationY();
-        //点击隐藏按钮显示垂直上移动画，显示按钮则下移
-        hideAndShowWindow.setOnClickListener(new View.OnClickListener() {
+        final float curTranslationY2 = layoutJumpBtn.getTranslationY();
+        //点击按钮显示垂直上移动画，再按则下移
+        findViewById(R.id.jump2route).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isShow) {
                     ObjectAnimator animator = ObjectAnimator
-                            .ofFloat(layoutRoutePlan, "translationY", curTranslationY, -400f);
-                    animator.setDuration(700).start();
-                    hideAndShowWindow.setText("显示");
-                    isShow=false;
-                }else {
+                            .ofFloat(layoutRoutePlan, "translationY", curTranslationY, -410f);
+                    animator.setDuration(500).start();
+                    ObjectAnimator animator2 = ObjectAnimator
+                            .ofFloat(layoutJumpBtn, "translationY", curTranslationY2, -410f);
+                    animator.setDuration(500).start();
+                    animator2.setDuration(500).start();
+                    isShow = false;
+                } else {
                     ObjectAnimator animator = ObjectAnimator
-                            .ofFloat(layoutRoutePlan, "translationY", -400f,curTranslationY);
-                    animator.setDuration(700).start();
-                    hideAndShowWindow.setText("隐藏");
-                    isShow=true;
+                            .ofFloat(layoutRoutePlan, "translationY", -410f, curTranslationY);
+                    ObjectAnimator animator2 = ObjectAnimator
+                            .ofFloat(layoutJumpBtn, "translationY", -410f, curTranslationY2);
+                    animator.setDuration(500).start();
+                    animator2.setDuration(500).start();
+                    isShow = true;
                 }
+            }
+        });
+        findViewById(R.id.jump2bus).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toBus = new Intent(RoutePlan.this, BusLineSearch.class);
+                startActivity(toBus);
+                finish();
+            }
+        });
+        findViewById(R.id.jump2pano).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toPano = new Intent(RoutePlan.this, PanoMain.class);
+                startActivity(toPano);
+                finish();
             }
         });
     }
@@ -177,7 +193,7 @@ public class RoutePlan extends Activity implements BaiduMap.OnMapClickListener,
                         finish();
                         break;
                     case 4://panorama
-                        Intent intent2Pano = new Intent(RoutePlan.this,Way2Pano.class);
+                        Intent intent2Pano = new Intent(RoutePlan.this,PanoMain.class);
                         startActivity(intent2Pano);
                         finish();
                         break;
@@ -218,7 +234,6 @@ public class RoutePlan extends Activity implements BaiduMap.OnMapClickListener,
         mBtnNext = (Button) findViewById(R.id.next);
         mBtnPre.setVisibility(View.INVISIBLE);
         mBtnNext.setVisibility(View.INVISIBLE);
-
         //隐藏缩放控件和百度logo
         int childCount = mMapView.getChildCount();
         for (int i = 0; i < childCount; i++) {
@@ -252,33 +267,23 @@ public class RoutePlan extends Activity implements BaiduMap.OnMapClickListener,
         fabView = findViewById(R.id.fab_add_routeplan);
         fabView.setOutlineProvider(viewOutlineProvider);
     }
-
-
-    /**
-     * 发起路线规划搜索示例
-     *
-     * @param v
-     */
+    //发起路线规划搜索示例
     public void SearchButtonProcess(View v) {
         //重置浏览节点的路线数据
         route = null;
         mBtnPre.setVisibility(View.INVISIBLE);
         mBtnNext.setVisibility(View.INVISIBLE);
         mBaidumap.clear();
-
         // 处理搜索按钮响应
         EditText editSt = (EditText) findViewById(R.id.start);
         EditText editEn = (EditText) findViewById(R.id.end);
         startCityText = (EditText) findViewById(R.id.et_startcity);
         endCityText = (EditText) findViewById(R.id.et_endcity);
 
-
         String startCity = startCityText.getText().toString();
         String endCity = endCityText.getText().toString();
         String startPlace = editSt.getText().toString();
         String endPlace = editEn.getText().toString();
-
-
         //设置起终点信息
         PlanNode stNode = PlanNode.withCityNameAndPlaceName(startCity, startPlace);
         PlanNode enNode = PlanNode.withCityNameAndPlaceName(endCity, endPlace);
@@ -298,12 +303,7 @@ public class RoutePlan extends Activity implements BaiduMap.OnMapClickListener,
                     .to(enNode));
         }
     }
-
-    /**
-     * 节点浏览示例
-     *
-     * @param v
-     */
+    //节点浏览示例
     public void nodeClick(View v) {
         if (route == null ||
                 route.getAllStep() == null) {
@@ -352,9 +352,7 @@ public class RoutePlan extends Activity implements BaiduMap.OnMapClickListener,
         popupText.setTextColor(0xFF000000);
         popupText.setText(nodeTitle);
         mBaidumap.showInfoWindow(new InfoWindow(popupText, nodeLocation, 0));
-
     }
-
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
@@ -382,7 +380,6 @@ public class RoutePlan extends Activity implements BaiduMap.OnMapClickListener,
             overlay.addToMap();
             overlay.zoomToSpan();
         }
-
     }
 
     @Override
@@ -431,7 +428,6 @@ public class RoutePlan extends Activity implements BaiduMap.OnMapClickListener,
             overlay.zoomToSpan();
         }
     }
-
     //设置地图显示模式
     public void setMapMode(View view) {
         boolean checked = ((RadioButton) view).isChecked();
@@ -446,17 +442,14 @@ public class RoutePlan extends Activity implements BaiduMap.OnMapClickListener,
                 break;
         }
     }
-
     //设置是否显示交通图
     public void setTraffic(View view) {
         mBaidumap.setTrafficEnabled(((CheckBox) view).isChecked());
     }
-
     //设置是否显示百度热力图
     public void setBaiduHeatMap(View view) {
         mBaidumap.setBaiduHeatMapEnabled(((CheckBox) view).isChecked());
     }
-
     //定位到我的位置
     private void centerToMyLocation() {
         LatLng latLng = new LatLng(mLatitude, mLongtitude);
@@ -480,7 +473,6 @@ public class RoutePlan extends Activity implements BaiduMap.OnMapClickListener,
             //更新经纬度
             mLatitude = location.getLatitude();
             mLongtitude = location.getLongitude();
-
             if (isFirstIn) {
                 LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
                 MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(latLng);
@@ -489,7 +481,6 @@ public class RoutePlan extends Activity implements BaiduMap.OnMapClickListener,
             }
         }
     }
-
 
     @Override
     public void onMapClick(LatLng point) {
@@ -512,7 +503,6 @@ public class RoutePlan extends Activity implements BaiduMap.OnMapClickListener,
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
     }
 
     @Override
@@ -560,7 +550,6 @@ public class RoutePlan extends Activity implements BaiduMap.OnMapClickListener,
         }
         return super.onOptionsItemSelected(item);
     }
-
     //点击EditText文本框之外任何地方隐藏键盘
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -601,5 +590,4 @@ public class RoutePlan extends Activity implements BaiduMap.OnMapClickListener,
         }
         return false;
     }
-
 }

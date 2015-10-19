@@ -199,6 +199,30 @@ public class PoiSearch extends FragmentActivity implements
 				centerToMyLocation();
 			}
 		});
+		findViewById(R.id.jump2route).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent toRoute = new Intent(PoiSearch.this, RoutePlan.class);
+				startActivity(toRoute);
+				finish();
+			}
+		});
+		findViewById(R.id.jump2bus).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent toBus = new Intent(PoiSearch.this, BusLineSearch.class);
+				startActivity(toBus);
+				finish();
+			}
+		});
+		findViewById(R.id.jump2pano).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent toPano = new Intent(PoiSearch.this, PanoMain.class);
+				startActivity(toPano);
+				finish();
+			}
+		});
 	}
 
 	private void showDialog() {
@@ -229,7 +253,7 @@ public class PoiSearch extends FragmentActivity implements
 						finish();
 						break;
 					case 4://panorama
-						Intent intent2Pano = new Intent(PoiSearch.this,Way2Pano.class);
+						Intent intent2Pano = new Intent(PoiSearch.this,PanoMain.class);
 						startActivity(intent2Pano);
 						finish();
 						break;

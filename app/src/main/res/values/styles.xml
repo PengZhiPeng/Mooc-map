@@ -1,7 +1,11 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Material.Light">
-    </style>
+    <style name="AppTheme" parent="android:Theme.Material.Light"></style>
 
+    <style name="bg_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">#d2d2d2</item>
+    </style>
 </resources>

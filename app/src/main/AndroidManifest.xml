@@ -78,15 +78,14 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".Way2Pano"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_way2_pano" >
+            android:name=".PanoMain"
+            android:screenOrientation="sensor" >
         </activity>
         <activity
-            android:name=".PanoMain"
-            android:screenOrientation="sensor">
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings" >
         </activity>
+
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"

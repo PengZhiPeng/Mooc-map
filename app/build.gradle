@@ -21,8 +21,8 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:cardview-v7:23.0.1'
     compile files('libs/IndoorscapeAlbumPlugin.jar')
-    compile 'com.android.support:support-v4:23.0.1'
     compile files('libs/BaiduLBS_Android.jar')
+    compile 'com.android.support:cardview-v7:23.0.1'
+    compile 'com.android.support:support-v4:23.0.1'
 }
