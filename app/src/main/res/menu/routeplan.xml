@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/action_car"
+        android:title="car"
+        android:icon="@drawable/ic_car"
+        android:orderInCategory="80"
+        app:showAsAction="always" />
+    <item android:id="@+id/action_bus"
+        android:title="bus"
+        android:icon="@drawable/ic_bus"
+        android:orderInCategory="90"
+        app:showAsAction="always" />
+    <item android:id="@+id/action_walk"
+        android:icon="@drawable/ic_walk"
+        android:title="walk"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+    <item android:id="@+id/action_select_text"
+        android:title="驾车去"
+        android:orderInCategory="110"
+        app:showAsAction="always" />
+</menu>

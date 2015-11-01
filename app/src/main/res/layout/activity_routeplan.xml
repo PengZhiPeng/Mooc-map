@@ -1,249 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/layout_routeplan"
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/map"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:clickable="true" />
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        android:clickable="true"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="4dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <include
+            layout="@layout/routeplan_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="1dp"
-            android:orientation="vertical">
+            android:layout_height="55dp" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#ffffff"
-                android:orientation="horizontal">
+                android:layout_marginTop="8dp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_weight="1"
-                    android:text="起始城市:"
-                    android:textSize="17sp" />
+                <include layout="@layout/jump_btn" />
+            </RelativeLayout>
 
-                <EditText
-                    android:id="@+id/et_startcity"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="6"
-                    android:gravity="center_horizontal"
-                    android:text="梅州"/>
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="34dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignWithParentIfMissing="false"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="false"
+                android:layout_marginBottom="60dip">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_weight="1"
-                    android:text="终点城市:"
-                    android:textSize="17sp" />
+                <Button
+                    android:id="@+id/pre"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="2dip"
+                    android:layout_marginRight="2dip"
+                    android:layout_weight="1.0"
+                    android:background="@drawable/route_plan_pre"
+                    android:onClick="nodeClick" />
 
-                <EditText
-                    android:id="@+id/et_endcity"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="6"
-                    android:gravity="center_horizontal"
-                    android:text="梅州"/>
+                <Button
+                    android:id="@+id/next"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1.0"
+                    android:background="@drawable/route_plan_next"
+                    android:onClick="nodeClick" />
             </LinearLayout>
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="#ffffff"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="起点："
-                    android:textSize="17sp" />
-
-                <EditText
-                    android:id="@+id/start"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="点击此处输入起点"/>
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="#ffffff"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="终点："
-                    android:textSize="17sp" />
-
-                <EditText
-                    android:id="@+id/end"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="点击此处输入终点"/>
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent"
+            <android.support.v7.widget.CardView
+                android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="#ffffff"
-                android:orientation="horizontal"
-                android:paddingBottom="3dp">
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="60dp"
+                android:layout_marginStart="10dp"
+                android:clickable="true"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="2dp">
 
-                <Button
-                    android:id="@+id/drive"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_marginLeft="2dip"
-                    android:layout_marginRight="2dip"
-                    android:layout_weight="1.0"
-                    android:background="@drawable/button_style"
-                    android:onClick="SearchButtonProcess"
-                    android:text="驾车搜索" />
+                <ImageButton
+                    android:id="@+id/ib_loca_routeplan"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/locate_icon_selector" />
+            </android.support.v7.widget.CardView>
 
-                <Button
-                    android:id="@+id/transit"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_marginLeft="2dip"
-                    android:layout_marginRight="2dip"
-                    android:layout_weight="1.0"
-                    android:background="@drawable/button_style"
-                    android:onClick="SearchButtonProcess"
-                    android:text="公交搜索" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true">
 
-                <Button
-                    android:id="@+id/walk"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_marginLeft="2dip"
-                    android:layout_marginRight="2dip"
-                    android:layout_weight="1.0"
-                    android:background="@drawable/button_style"
-                    android:onClick="SearchButtonProcess"
-                    android:text="步行搜索" />
-            </LinearLayout>
+                <include layout="@layout/map_type" />
+            </RelativeLayout>
 
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="50dp">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.baidu.mapapi.map.MapView
-            android:id="@+id/map"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:clickable="true" />
-
-        <RelativeLayout
-            android:id="@+id/layout_jumpBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="188dp">
-
-            <include layout="@layout/jump_btn" />
+                <include layout="@layout/zoom_ctrl" />
+            </RelativeLayout>
         </RelativeLayout>
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="100dp"
-            android:layout_height="34dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignWithParentIfMissing="false"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="false"
-            android:layout_marginBottom="60dip">
-
-            <Button
-                android:id="@+id/pre"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_marginLeft="2dip"
-                android:layout_marginRight="2dip"
-                android:layout_weight="1.0"
-                android:background="@drawable/route_plan_pre"
-                android:onClick="nodeClick" />
-
-            <Button
-                android:id="@+id/next"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_marginLeft="10dip"
-                android:layout_weight="1.0"
-                android:background="@drawable/route_plan_next"
-                android:onClick="nodeClick" />
-        </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/fab_add_routeplan"
-            android:layout_width="@dimen/fab_size"
-            android:layout_height="@dimen/fab_size"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="60dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/ripple"
-            android:elevation="2dp"
-            android:src="@drawable/ic_action_add"
-            android:stateListAnimator="@anim/anim"
-            android:translationZ="120dp" />
-
-        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="60dp"
-            android:layout_marginStart="10dp"
-            android:clickable="true"
-            app:cardCornerRadius="4dp"
-            app:cardElevation="2dp">
-
-            <ImageButton
-                android:id="@+id/ib_loca_routeplan"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:background="@drawable/locate_icon_selector" />
-        </android.support.v7.widget.CardView>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true">
-
-            <include layout="@layout/map_type" />
-
-        </RelativeLayout>
-
-    </RelativeLayout>
-
-
+    </LinearLayout>
 </RelativeLayout>

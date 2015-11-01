@@ -1,6 +1,5 @@
 package com.imooc.baidumap;
 
-import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
@@ -8,9 +7,9 @@ import android.widget.Toast;
 import com.baidu.lbsapi.BMapManager;
 import com.baidu.lbsapi.MKGeneralListener;
 
-public class PanoDemoApplication extends Application {
+public class Application extends android.app.Application {
 
-    private static PanoDemoApplication mInstance = null;
+    private static Application mInstance = null;
     public BMapManager mBMapManager = null;
 
     @Override
@@ -26,13 +25,13 @@ public class PanoDemoApplication extends Application {
         }
 
         if (!mBMapManager.init(new MyGeneralListener())) {
-            Toast.makeText(PanoDemoApplication.getInstance().getApplicationContext(), "BMapManager  初始化错误!",
+            Toast.makeText(Application.getInstance().getApplicationContext(), "BMapManager  初始化错误!",
                     Toast.LENGTH_LONG).show();
         }
         Log.d("ljx", "initEngineManager");
     }
 
-    public static PanoDemoApplication getInstance() {
+    public static Application getInstance() {
         return mInstance;
     }
 
@@ -44,10 +43,10 @@ public class PanoDemoApplication extends Application {
             // 非零值表示key验证未通过
             if (iError != 0) {
                 // 授权Key错误：
-                Toast.makeText(PanoDemoApplication.getInstance().getApplicationContext(),
+                Toast.makeText(Application.getInstance().getApplicationContext(),
                         "请在AndoridManifest.xml中输入正确的授权Key,并检查您的网络连接是否正常！error: " + iError, Toast.LENGTH_LONG).show();
             } else {
-//                Toast.makeText(PanoDemoApplication.getInstance().getApplicationContext(), "key认证成功", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(Application.getInstance().getApplicationContext(), "key认证成功", Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -23,7 +23,7 @@ public class MyOrientationListener implements SensorEventListener {
     public void start(){
         mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
         if (mSensorManager!=null){
-            //»ñµÃ·½Ïò´«¸ĞÆ÷
+            //è·å¾—æ–¹å‘ä¼ æ„Ÿå™¨
            mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
         }
         if (mSensor!=null){

@@ -25,10 +25,10 @@ public class PanoMain extends Activity {
     }
 
     private void initBMapManager() {
-        PanoDemoApplication app = (PanoDemoApplication) this.getApplication();
+        Application app = (Application) this.getApplication();
         if (app.mBMapManager == null) {
             app.mBMapManager = new BMapManager(app);
-            app.mBMapManager.init(new PanoDemoApplication.MyGeneralListener());
+            app.mBMapManager.init(new Application.MyGeneralListener());
         }
     }
 

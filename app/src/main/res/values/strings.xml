@@ -1,6 +1,43 @@
 <resources>
     <string name="app_name">Mooc-map</string>
-    <string name="demo_name_poi">POI搜索功能</string>
-    <string name="title_activity_settings">设置</string>
-
+    <string name="title_activity_more_info">更多</string>
+    <string name="developer">开发者</string>
+    <string name="my_name">彭志鹏</string>
+    <string name="instructor">指导老师：杨久红</string>
+    <string name="feedback">反馈</string>
+    <string name="help">帮助</string>
+    <string name="about">关于</string>
+    <string name="bus_search">公交搜索</string>
+    <string name="car_search">驾车搜索</string>
+    <string name="click2write_end_place">点击此处输入终点</string>
+    <string name="click2write_start_place">点击此处输入起点</string>
+    <string name="end_place">最终地点：</string>
+    <string name="start_place">起始地点：</string>
+    <string name="meizhou">梅州</string>
+    <string name="end_city">终点城市：</string>
+    <string name="start_city">起始城市：</string>
+    <string name="walk_search">步行搜索</string>
+    <string name="in">在</string>
+    <string name="find">找</string>
+    <string name="second">2</string>
+    <string name="bus_number">路公交</string>
+    <string name="start">开始</string>
+    <string name="next">下一条</string>
+    <string name="find_poi">查找景点、酒店、餐厅</string>
+    <string name="map_normal">普通图</string>
+    <string name="map_satellite">卫星图</string>
+    <string name="map_traffic">交通图</string>
+    <string name="more">更多</string>
+    <string name="title_activity_route_plan">路线规划</string>
+    <string name="title_activity_busline_search">公交线路查询</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <string name="my_email">503340857@qq.com</string>
+    <string name="my_academy">电子信息工程学院</string>
+    <string name="my_studentID">学号：121100012</string>
+    <string name="my_class">班级：1201班</string>
+    <string name="my_university">嘉应大学</string>
+    <string name="my_phone_number">137–5052–9185</string>
+    <string name="my_qq">QQ：503340857</string>
 </resources>

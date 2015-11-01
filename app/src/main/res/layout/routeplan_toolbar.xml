@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="48dp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:clickable="true"
+        app:cardBackgroundColor="#ffe74c3c"
+        app:cardElevation="4dp">
+
+        <ImageView
+            android:id="@+id/action_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="6dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:src="@drawable/ic_arrow_left_white_48dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/action_car"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:onClick="showDialog"
+                android:background="?android:attr/selectableItemBackground"
+                android:src="@drawable/ic_car" />
+
+            <ImageView
+                android:id="@+id/action_bus"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="12dp"
+                android:onClick="showDialog"
+                android:background="?android:attr/selectableItemBackground"
+                android:src="@drawable/ic_bus" />
+
+            <ImageView
+                android:id="@+id/action_walk"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="8dp"
+                android:onClick="showDialog"
+                android:background="?android:attr/selectableItemBackground"
+                android:src="@drawable/ic_walk" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_marginEnd="8dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:text="开车去"
+            android:textColor="#ffffff"
+            android:textSize="17sp" />
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/dialog_bg"
+    android:orientation="vertical"
+    android:paddingEnd="8dp"
+    android:paddingStart="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/start_city"
+            android:textColor="@color/text_color"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/et_startcity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="6"
+            android:gravity="center"
+            android:text="@string/meizhou"
+            android:textColor="@color/text_color" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/end_city"
+            android:textColor="@color/text_color"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/et_endcity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="6"
+            android:gravity="center"
+            android:text="@string/meizhou"
+            android:textColor="@color/text_color" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/start_place"
+            android:textColor="@color/text_color"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/start"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/click2write_start_place"
+            android:textColor="@color/text_color" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/end_place"
+            android:textColor="@color/text_color"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/end"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/click2write_end_place"
+            android:textColor="@color/text_color" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/drive"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:layout_marginStart="3dp"
+            android:onClick="SearchButtonProcess"
+            android:background="@drawable/btn_selector"
+            android:text="@string/car_search"
+            android:textColor="@color/text_color"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/transit"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/btn_selector"
+            android:text="@string/bus_search"
+            android:textColor="@color/text_color"
+            android:textSize="16sp"
+            android:onClick="SearchButtonProcess"/>
+
+        <Button
+            android:id="@+id/walk"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/btn_selector"
+            android:text="@string/walk_search"
+            android:textColor="@color/text_color"
+            android:textSize="16sp"
+            android:onClick="SearchButtonProcess"/>
+
+    </LinearLayout>
+</LinearLayout>

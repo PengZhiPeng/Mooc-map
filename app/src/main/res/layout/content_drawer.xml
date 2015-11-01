@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:background="#ffefebe7"
     android:orientation="vertical"
-    tools:context="com.imooc.baidumap.SettingsActivity">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.imooc.baidumap.DrawerActivity"
+    tools:showIn="@layout/app_bar_drawer">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -48,14 +50,14 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="开发者"
+                            android:text="@string/developer"
                             android:textColor="#ff333333"
                             android:textSize="20sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="彭志鹏"
+                            android:text="@string/my_name"
                             android:textSize="16sp" />
                     </LinearLayout>
                 </TableRow>
@@ -81,7 +83,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="指导：杨久红老师"
+                        android:text="@string/instructor"
                         android:textColor="#ff333333"
                         android:textSize="18sp" />
 
@@ -126,7 +128,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="反馈"
+                        android:text="@string/feedback"
                         android:textColor="#ff333333"
                         android:textSize="18sp" />
 
@@ -158,7 +160,39 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="帮助"
+                        android:text="@string/help"
+                        android:textColor="#ff333333"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/arrow_right_grey_36dp" />
+                </TableRow>
+
+                <View
+                    style="@style/bg_line"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/help" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/help"
                         android:textColor="#ff333333"
                         android:textSize="18sp" />
 
@@ -190,7 +224,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="关于"
+                        android:text="@string/about"
                         android:textColor="#ff333333"
                         android:textSize="18sp" />
 
@@ -202,6 +236,7 @@
             </TableLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
+
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -222,6 +257,7 @@
                 android:stretchColumns="1">
 
                 <TableRow
+                    android:id="@+id/id_feedback"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?android:attr/selectableItemBackground"
@@ -238,7 +274,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="反馈"
+                        android:text="@string/feedback"
                         android:textColor="#ff333333"
                         android:textSize="18sp" />
 
@@ -254,6 +290,7 @@
                     android:layout_marginStart="8dp" />
 
                 <TableRow
+                    android:id="@+id/id_help"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?android:attr/selectableItemBackground"
@@ -270,7 +307,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="帮助"
+                        android:text="@string/help"
                         android:textColor="#ff333333"
                         android:textSize="18sp" />
 
@@ -286,6 +323,7 @@
                     android:layout_marginStart="8dp" />
 
                 <TableRow
+                    android:id="@+id/id_about"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?android:attr/selectableItemBackground"
@@ -302,7 +340,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="关于"
+                        android:text="@string/about"
                         android:textColor="#ff333333"
                         android:textSize="18sp" />
 
@@ -314,5 +352,4 @@
             </TableLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
-
 </LinearLayout>
